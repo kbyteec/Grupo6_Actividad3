@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="public/vendor/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+        <title>Grupo 6 - Actividad 3</title>
+    </head>
+    <body>
+        <!-- header -->
+        <header class="justify-content-center shadow-sm mb-3">
+            <div class="row">
+                <div class="my-3 col-sm-12 col-md-3">
+                    <img src="public/img/logo_espe.jpg" alt="ESPE Logo">
+                </div>
+                <div class="py-4 text-center col-md-9">
+                    <h1>Grupo 6 - Actividad 3</h1>
+                    <p class="lead">Aplicación de Tecnologías Web</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Calculadora de descuentos</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="discountForm" novalidate>
+                                <div class="mb-3">
+                                    <label for="productName" class="form-label">Nombre del producto</label>
+                                    <input type="text" class="form-control" id="productName" name="productName" required placeholder="Ej. Laptop">
+                                    <div class="invalid-feedback">Ingresa el nombre del producto.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productPrice" class="form-label">Precio del producto</label>
+                                    <input type="number" class="form-control" id="productPrice" name="productPrice" min="0" step="0.01" required placeholder="Ej. 499.99">
+                                    <div class="invalid-feedback">Ingresa un precio válido mayor o igual a 0.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="clientType" class="form-label">Tipo de cliente</label>
+                                    <select class="form-select" id="clientType" name="clientType" required>
+                                        <option value="" selected disabled>Selecciona una opción</option>
+                                        <option value="estudiante">Estudiante</option>
+                                        <option value="adulto">Adulto</option>
+                                        <option value="jubilado">Jubilado</option>
+                                    </select>
+                                    <div class="invalid-feedback">Selecciona el tipo de cliente.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="paymentMethod" class="form-label">Forma de pago</label>
+                                    <select class="form-select" id="paymentMethod" name="paymentMethod" required>
+                                        <option value="" selected disabled>Selecciona una opción</option>
+                                        <option value="efectivo">Efectivo</option>
+                                        <option value="tarjeta">Tarjeta</option>
+                                        <option value="transferencia">Transferencia</option>
+                                    </select>
+                                    <div class="invalid-feedback">Selecciona la forma de pago.</div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Calcular descuento</button>
+                                </div>
+                            </form>
+                            <div id="result" class="alert alert-info mt-4 d-none" role="alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section ">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 bg-primary shadow-sm rounded">
+                        <div class="mb-3  text-white ">
+                            <h3 class="">Integrantes:</h3>
+                            <ul>
+                                <li>DIEGO ROBERTO DIAZ CHAVEZ</li>
+                                <li>CRISTINA BELÉN ENRIQUEZ SÁNCHEZ</li>
+                                <li>MARIA JOSE HARO VELASCO ISAAC</li>
+                                <li>GEOVANNY BETUN VERGARA</li>
+                                <li>MARCOS MOISES MORALES VELASCO</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center">
+            <p>
+                &copy; 2025 Grupo 6 - Todos los derechos reservados.
+            </p>
+        </footer>
+        
+
+    <script src="public/vendor/bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+    <script src="public/js/script.js"></script>
+    </body>
+</html>
