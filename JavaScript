@@ -1,0 +1,68 @@
+// 2.1. Obtener los valores de los campos de entrada
+        const productName = document.getElementById('productName').value;
+        // Convertir el precio a número flotante para los cálculos
+        const originalPrice = parseFloat(document.getElementById('originalPrice').value);
+        const customerType = document.getElementById('customerType').value;
+        const paymentMethod = document.getElementById('paymentMethod').value;
+
+        // 2.2. Inicializar variables de descuento en 0
+        let baseDiscountRate = 0; 
+        let cashDiscount = 0;      
+        let motivationalText = '';
+// 3. Descuento base según tipo de cliente (if...else if...else)
+        if (customerType === 'estudiante') {
+            baseDiscountRate = 0.20; // 20%
+        } else if (customerType === 'adulto') {
+            baseDiscountRate = 0.10; // 10%
+        } else if (customerType === 'jubilado') {
+            baseDiscountRate = 0.30; // 30%
+        }
+// 4. Descuento adicional por pago en efectivo (Operador Ternario)
+        // Agrega 0.05 (5%) si es 'efectivo', de lo contrario, 0.
+        cashDiscount = (paymentMethod === 'efectivo') ? 0.05 : 0;
+// 5.1. Calcular la tasa de descuento total
+        const totalDiscountRate = baseDiscountRate + cashDiscount;
+            
+        // 5.2. Calcular el precio final
+        const finalPrice = originalPrice * (1 - totalDiscountRate);
+// 6. Mensaje motivacional (Estructura switch)
+        let alertBgClass = ''; // Para cambiar el color de fondo de la alerta
+        let alertTextColorClass = ''; // Para cambiar el color del texto
+
+        switch (customerType) {
+            case 'estudiante':
+                motivationalText = '¡Excelente inversión en tu futuro! Sigue aprendiendo con la energía de un Estudiante.';
+                alertBgClass = 'bg-blue-100 border-blue-400';
+                alertTextColorClass = 'text-blue-700';
+                break;
+            case 'adulto':
+                motivationalText = '¡Gracias por tu compra! Aprovecha tu día con la vitalidad de un Adulto.';
+                alertBgClass = 'bg-green-100 border-green-400';
+                alertTextColorClass = 'text-green-700';
+                break;
+            case 'jubilado':
+                motivationalText = '¡Merecido descuento! Disfruta tu compra con la sabiduría de un Jubilado.';
+                alertBgClass = 'bg-yellow-100 border-yellow-400';
+                alertTextColorClass = 'text-yellow-700';
+                break;
+        }
+// 7.1. Formatear y preparar los valores para mostrar
+        const formattedOriginalPrice = originalPrice.toFixed(2) + ' €';
+        const formattedFinalPrice = finalPrice.toFixed(2) + ' €';
+        // Descuento total: se multiplica por 100 para porcentaje
+        const formattedTotalDiscountPercentage = (totalDiscountRate * 100).toFixed(0) + '%';
+            
+        // 7.2. Actualizar los elementos de salida
+        document.getElementById('outputProductName').textContent = productName;
+        document.getElementById('outputOriginalPrice').textContent = formattedOriginalPrice;
+        document.getElementById('outputTotalDiscount').textContent = formattedTotalDiscountPercentage;
+        document.getElementById('outputFinalPrice').textContent = formattedFinalPrice;
+
+        // 7.3. Actualizar el mensaje motivacional con el estilo (clases CSS)
+        const msgElement = document.getElementById('motivationalMessage');
+        msgElement.className = `rounded-lg p-4 mb-4 text-center border ${alertBgClass} ${alertTextColorClass}`;
+        msgElement.innerHTML = `<p class="font-bold">¡Descuento Aplicado!</p><p>${motivationalText}</p>`;
+
+        // 7.4. Mostrar el contenedor de resultados (asumiendo que tiene la clase 'hidden' inicialmente)
+        document.getElementById('resultContainer').classList.remove('hidden');
+        document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });  
