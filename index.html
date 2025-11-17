@@ -8,7 +8,6 @@
         <title>Grupo 6 - Actividad 3</title>
     </head>
     <body>
-        <!-- header -->
         <header class="justify-content-center shadow-sm mb-3">
             <div class="row">
                 <div class="my-3 col-sm-12 col-md-3">
@@ -61,7 +60,7 @@
                                     <div class="invalid-feedback">Selecciona la forma de pago.</div>
                                 </div>
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Calcular descuento</button>
+                                    <button id="dicountButton" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#discountModal">Calcular descuento</button>
                                 </div>
                             </form>
                             <div id="result" class="alert alert-info mt-4 d-none" role="alert"></div>
@@ -70,6 +69,52 @@
                 </div>
             </section>
 
+            <div class="modal fade" id="discountModal" tabindex="-1" aria-labelledby="discountModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title" id="discountModalLabel">Resultado del Cálculo</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            
+                            <ul class="list-group list-group-flush">
+                                
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Nombre del producto:
+                                    <span id="modalProductName" class="fw-bold"></span>
+                                </li>
+                                
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Precio original:
+                                    <span id="modalOriginalPrice" class="text-muted text-decoration-line-through"></span>
+                                </li>
+                                
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Porcentaje total de descuento:
+                                    <span id="modalTotalDiscount" class="badge bg-success rounded-pill"></span>
+                                </li>
+                                
+                                <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center">
+                                    <strong class="h5 mb-0">Precio final con descuento:</strong>
+                                    <span id="modalFinalPrice" class="h5 fw-bold mb-0"></span>
+                                </li>
+                            </ul>
+            
+                            <div class="alert alert-info mt-3 mb-0" role="alert">
+                                <strong>Mensaje:</strong>
+                                <span id="modalClientMessage"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="section ">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 bg-primary shadow-sm rounded">
