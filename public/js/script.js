@@ -1,3 +1,4 @@
+// Contribución en Grupo 6 - Actividad 3: Isaac Betún
 /**
  * Esta función calcula el descuento y el precio final.
  * @param {number} price - El precio original del producto.
