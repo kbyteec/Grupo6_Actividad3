@@ -1,36 +1,42 @@
 /**
- * Esta función calcula el descuento y el precio final.
- * @param {number} price - El precio original del producto.
- * @param {string} clientType - El tipo de cliente (estudiante, adulto, jubilado).
- * @param {string} paymentMethod - El método de pago (efectivo, tarjeta, transferencia).
- * @returns {object} - Un objeto con los resultados del cálculo.
+ * Calcula el descuento y el precio final usando estructuras básicas.
+ * @param {number} price 
+ * @param {string} clientType 
+ * @param {string} paymentMethod 
+ * @returns {object}
  */
 function calculateDiscount(price, clientType, paymentMethod) {
+
     let discountPercent = 0;
     let clientMessage = "";
 
-    // 1. Descuento por tipo de cliente
+    // 1. DESCUENTO SEGÚN TIPO DE CLIENTE (IF...ELSE)
+    if (clientType === "estudiante") {
+        discountPercent = 20;
+    } else if (clientType === "adulto") {
+        discountPercent = 10;
+    } else if (clientType === "jubilado") {
+        discountPercent = 30;
+    }
+
+    // 2. DESCUENTO ADICIONAL POR PAGO EN EFECTIVO (TERNARIO)
+    let extraDiscount = (paymentMethod === "efectivo") ? 5 : 0;
+    discountPercent += extraDiscount;
+
+    // 3. MENSAJE MOTIVACIONAL SEGÚN CLIENTE (SWITCH)
     switch (clientType) {
-        case 'estudiante':
-            discountPercent += 10; // 10%
-            clientMessage = "Descuento de estudiante aplicado.";
+        case "estudiante":
+            clientMessage = "¡Sigue adelante con tus estudios!";
             break;
-        case 'jubilado':
-            discountPercent += 15; // 15%
-            clientMessage = "Descuento de jubilado aplicado.";
+        case "adulto":
+            clientMessage = "Gracias por preferirnos, excelente elección.";
             break;
-        case 'adulto':
-        default:
-            clientMessage = "No se aplican descuentos para este tipo de cliente.";
+        case "jubilado":
+            clientMessage = "Aproveche sus beneficios, usted lo merece.";
             break;
     }
 
-    // 2. Descuento adicional por método de pago (con operadores ternarios)
-    discountPercent += (paymentMethod === 'efectivo' ? 5 : 0);
-    clientMessage += (paymentMethod === 'efectivo' ? " Se añadió 5% por pago en efectivo." : "");
-
-
-    // 3. Cálculos finales
+    // 4. CÁLCULO FINAL
     const totalDiscount = price * (discountPercent / 100);
     const finalPrice = price - totalDiscount;
 
@@ -43,40 +49,30 @@ function calculateDiscount(price, clientType, paymentMethod) {
 }
 
 /**
- * Esta función llena el modal con los datos calculados.
- * @param {object} data - Los datos del formulario y los resultados del cálculo.
+ * Muestra los datos en el modal sin modificar su estructura original.
  */
 function showModal(data) {
-    // Usamos los IDs del HTML del modal que creamos antes
     document.getElementById('modalProductName').textContent = data.productName;
-
-    // Formateamos los números como moneda
     document.getElementById('modalOriginalPrice').textContent = `$${data.originalPrice.toFixed(2)}`;
     document.getElementById('modalTotalDiscount').textContent = `${data.totalDiscountPercent}%`;
     document.getElementById('modalFinalPrice').textContent = `$${data.finalPrice.toFixed(2)}`;
-
     document.getElementById('modalClientMessage').textContent = data.clientMessage;
 }
 
 /**
- * Esta función se ejecuta cuando se envía el formulario.
- * @param {Event} event - El objeto del evento de envío.
+ * Maneja el envío del formulario.
  */
 function handleSubmit(event) {
-    // Evita que la página se recargue
     event.preventDefault();
 
-    // 1. Obtener los datos del formulario
     const formData = new FormData(event.target);
     const productName = formData.get('productName');
-    const productPrice = parseFloat(formData.get('productPrice')); // Convertir a número
+    const productPrice = parseFloat(formData.get('productPrice'));
     const clientType = formData.get('clientType');
     const paymentMethod = formData.get('paymentMethod');
 
-    // 2. Calcular los descuentos
     const results = calculateDiscount(productPrice, clientType, paymentMethod);
 
-    // 3. Preparar los datos para el modal
     const modalData = {
         productName: productName,
         originalPrice: results.originalPrice,
@@ -85,34 +81,20 @@ function handleSubmit(event) {
         clientMessage: results.clientMessage
     };
 
-    // 4. Llenar el modal con los datos
-    // El modal se mostrará automáticamente gracias a los atributos
-    // 'data-bs-toggle' y 'data-bs-target' en el botón de submit.
     showModal(modalData);
 }
 
 /**
- * Esta función solo registra cambios en la consola.
- * @param {Event} event - El objeto del evento.
- */
-
-
-/**
- * Esta función encuentra los elementos y adjunta los event listeners
- * después de que el DOM se haya cargado.
+ * Configura los listeners cuando el DOM está listo.
  */
 function setupListeners() {
-    console.log("DOM loaded");
-
-    // Obtener referencias a los elementos
     const discountForm = document.getElementById('discountForm');
-    // Adjuntar listener al formulario (principal)
+
     if (discountForm) {
         discountForm.addEventListener('submit', handleSubmit);
     } else {
-        console.error("Error: Elemento con ID 'discountForm' no encontrado.");
+        console.error("Error: No existe el formulario con ID 'discountForm'");
     }
 }
 
-// 4. Esperar a que el HTML esté listo para ejecutar la configuración.
 document.addEventListener('DOMContentLoaded', setupListeners);
