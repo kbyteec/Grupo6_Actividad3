@@ -1,0 +1,15 @@
+
+header img {
+    max-height: 95px;
+}
+
+.section .bg-primary {
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+}
