@@ -10,6 +10,7 @@ function calculateDiscount(price, clientType, paymentMethod) {
     let discountPercent = 0;
     let clientMessage = "";
 
+    //Lógica con JS
     // 1. DESCUENTO SEGÚN TIPO DE CLIENTE (IF...ELSE)
     if (clientType === "estudiante") {
         discountPercent = 20;
